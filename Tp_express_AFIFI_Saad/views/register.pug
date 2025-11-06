@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  // utiliser tag explicite car lg:grid-cols-2 contient ':'
+  div(class="grid grid-cols-1 lg:grid-cols-2 gap-8")
+    // Left: illustration / texte
+    div(class="hidden lg:flex flex-col justify-center px-8")
+      h2(class="text-3xl font-extrabold text-slate-800 mb-4") Rejoins-nous !
+      p(class="text-slate-600 mb-6") Crée un compte pour accéder à la liste exclusive des livres
+      ul(class="space-y-3 text-sm text-slate-600")
+        li ✔ Interface simple et sécurisée
+        li ✔ Stockage avec MongoDB
+        li ✔ Authentification gérée par Passport.js
+
+    // Right: form card
+    div(class="mx-auto max-w-md w-full bg-white shadow-lg rounded-xl p-6")
+      h3(class="text-xl font-semibold text-slate-800 mb-4") Création de compte
+      form(action="/register" method="POST" class="space-y-4")
+        label(class="block")
+          span(class="text-sm text-slate-700") Nom d'utilisateur
+          input(type="text" name="username" required placeholder="ex: saad_aff" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-brand focus:ring-1 focus:ring-brand px-3 py-2")
+        label(class="block")
+          span(class="text-sm text-slate-700") Mot de passe
+          input(type="password" name="password" required placeholder="••••••••" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-brand focus:ring-1 focus:ring-brand px-3 py-2")
+        button(type="submit" class="w-full py-2 rounded-md bg-brand text-white font-medium hover:bg-brand-dark transition") S'inscrire
+      p(class="text-center text-sm text-slate-500 mt-4")
+        | Tu as déjà un compte ?
+        a(href="/login" class="text-brand font-medium hover:underline ml-1") Connecte-toi

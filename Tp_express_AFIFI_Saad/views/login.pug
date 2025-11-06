@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div(class="flex flex-col items-center")
+    div(class="w-full max-w-md bg-white shadow-lg rounded-xl p-6")
+      h3(class="text-2xl font-semibold text-slate-800 mb-4") Connexion
+      form(action="/login" method="POST" class="space-y-4")
+        label(class="block")
+          span(class="text-sm text-slate-700") Nom d'utilisateur
+          input(type="text" name="username" required placeholder="Ton nom d'utilisateur" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-brand focus:ring-1 focus:ring-brand px-3 py-2")
+        label(class="block")
+          span(class="text-sm text-slate-700") Mot de passe
+          input(type="password" name="password" required placeholder="••••••••" class="mt-1 block w-full rounded-md border-gray-200 shadow-sm focus:border-brand focus:ring-1 focus:ring-brand px-3 py-2")
+        button(type="submit" class="w-full py-2 rounded-md bg-brand text-white font-medium hover:bg-brand-dark transition") Se connecter
+      div(class="mt-4 text-center text-sm text-slate-500")
+        | Pas encore inscrit ?
+        a(href="/register" class="text-brand font-medium hover:underline ml-1") Créer un compte
