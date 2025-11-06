@@ -1,0 +1,11 @@
+{
+  "name": "book-tracker-frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

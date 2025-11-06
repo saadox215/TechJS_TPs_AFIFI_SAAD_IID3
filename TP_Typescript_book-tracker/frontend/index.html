@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Book Reading Tracker</h1>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-semibold mb-4">Ajouter un livre</h2>
+        <form id="bookForm" class="space-y-3">
+          <input name="title" placeholder="Titre" required class="w-full px-3 py-2 border rounded" />
+          <input name="author" placeholder="Auteur" class="w-full px-3 py-2 border rounded" />
+          <input name="pages" type="number" placeholder="Nombre de pages" required class="w-full px-3 py-2 border rounded" />
+          <select name="status" class="w-full px-3 py-2 border rounded">
+            <option>Want to read</option>
+            <option>Currently reading</option>
+            <option>Read</option>
+            <option>Re-read</option>
+            <option>DNF</option>
+            <option>Returned Unread</option>
+          </select>
+          <input name="price" type="number" placeholder="Prix" class="w-full px-3 py-2 border rounded" />
+          <input name="pagesRead" type="number" placeholder="Pages lues (par défaut 0)" class="w-full px-3 py-2 border rounded" />
+          <select name="format" class="w-full px-3 py-2 border rounded">
+            <option>Print</option><option>PDF</option><option>Ebook</option><option>AudioBook</option>
+          </select>
+          <input name="suggestedBy" placeholder="Suggéré par" class="w-full px-3 py-2 border rounded" />
+          <div class="flex gap-2">
+            <button type="submit" class="bg-brand px-4 py-2 rounded text-white" style="background:#0ea5a4">Ajouter</button>
+            <button type="reset" class="px-4 py-2 rounded border">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="bg-white p-6 rounded-xl shadow mb-4">
+          <h2 class="text-xl font-semibold">Statistiques</h2>
+          <div class="mt-3 grid grid-cols-3 gap-3 text-center">
+            <div class="p-3 border rounded">
+              <div class="text-sm">Total livres</div>
+              <div id="statTotal" class="text-xl font-bold">0</div>
+            </div>
+            <div class="p-3 border rounded">
+              <div class="text-sm">Pages lues</div>
+              <div id="statPages" class="text-xl font-bold">0</div>
+            </div>
+            <div class="p-3 border rounded">
+              <div class="text-sm">Livres finis</div>
+              <div id="statFinished" class="text-xl font-bold">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="booksList" class="space-y-4"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./dist/main.js"></script>
+</body>
+</html>
