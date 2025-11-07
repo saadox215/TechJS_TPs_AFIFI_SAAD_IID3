@@ -17,6 +17,7 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 // creation du modele a partir du schema
+
 const User = mongoose.model("User", userSchema);
 
 // Configuration Mongoose
