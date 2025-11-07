@@ -3,65 +3,121 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Book Tracker</title>
+  <title>Book Tracker — Saad</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --brand: #7c3aed;
+      --accent: #06b6d4;
+    }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    .glass {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+    }
+  </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen text-slate-800">
   <div class="max-w-6xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Book Reading Tracker</h1>
+    <header class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">Book Reading Tracker</h1>
+        <p class="mt-1 text-slate-600">Suivez votre lecture simplement et efficacement.</p>
+      </div>
+      <div class="flex items-center gap-3">
+   
+      </div>
+    </header>
 
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white p-6 rounded-xl shadow">
-        <h2 class="text-xl font-semibold mb-4">Ajouter un livre</h2>
-        <form id="bookForm" class="space-y-3">
-          <input name="title" placeholder="Titre" required class="w-full px-3 py-2 border rounded" />
-          <input name="author" placeholder="Auteur" class="w-full px-3 py-2 border rounded" />
-          <input name="pages" type="number" placeholder="Nombre de pages" required class="w-full px-3 py-2 border rounded" />
-          <select name="status" class="w-full px-3 py-2 border rounded">
-            <option>Want to read</option>
-            <option>Currently reading</option>
-            <option>Read</option>
-            <option>Re-read</option>
-            <option>DNF</option>
-            <option>Returned Unread</option>
-          </select>
-          <input name="price" type="number" placeholder="Prix" class="w-full px-3 py-2 border rounded" />
-          <input name="pagesRead" type="number" placeholder="Pages lues (par défaut 0)" class="w-full px-3 py-2 border rounded" />
-          <select name="format" class="w-full px-3 py-2 border rounded">
-            <option>Print</option><option>PDF</option><option>Ebook</option><option>AudioBook</option>
-          </select>
-          <input name="suggestedBy" placeholder="Suggéré par" class="w-full px-3 py-2 border rounded" />
-          <div class="flex gap-2">
-            <button type="submit" class="bg-brand px-4 py-2 rounded text-white" style="background:#0ea5a4">Ajouter</button>
-            <button type="reset" class="px-4 py-2 rounded border">Reset</button>
-          </div>
-        </form>
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl shadow-lg p-6 glass border border-slate-100">
+          <h2 class="text-xl font-semibold text-slate-900 mb-4">Ajouter un livre</h2>
+          <form id="bookForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input name="title" placeholder="Titre (obligatoire)" required class="col-span-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" />
+            <input name="author" placeholder="Auteur" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+            <input name="pages" type="number" placeholder="Nombre de pages" required min="1" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" />
+            <input name="pagesRead" type="number" placeholder="Pages lues (0 par défaut)" min="0" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+            <select name="status" class="col-span-1 sm:col-span-2 px-4 py-2 border rounded-lg focus:outline-none">
+              <option>Want to read</option>
+              <option>Currently reading</option>
+              <option>Read</option>
+              <option>Re-read</option>
+              <option>DNF</option>
+              <option>Returned Unread</option>
+            </select>
+            <select name="format" class="px-4 py-2 border rounded-lg focus:outline-none">
+              <option>Print</option><option>PDF</option><option>Ebook</option><option>AudioBook</option>
+            </select>
+            <input name="price" type="number" placeholder="Prix" class="px-4 py-2 border rounded-lg focus:outline-none" />
+            <input name="suggestedBy" placeholder="Suggéré par" class="px-4 py-2 border rounded-lg focus:outline-none" />
+            <div class="col-span-2 flex items-center gap-3 mt-1">
+              <button type="submit" class="bg-[var(--brand)] hover:bg-violet-700 text-white px-5 py-2 rounded-lg shadow">Ajouter le livre</button>
+              <button type="reset" class="px-4 py-2 rounded-lg border border-slate-200">Réinitialiser</button>
+            </div>
+          </form>
+        </div>
+        <div id="booksList" class="mt-6 space-y-4"></div>
       </div>
 
-      <div>
-        <div class="bg-white p-6 rounded-xl shadow mb-4">
-          <h2 class="text-xl font-semibold">Statistiques</h2>
-          <div class="mt-3 grid grid-cols-3 gap-3 text-center">
-            <div class="p-3 border rounded">
-              <div class="text-sm">Total livres</div>
-              <div id="statTotal" class="text-xl font-bold">0</div>
+      <aside class="space-y-4">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+          <h3 class="text-lg font-semibold mb-3">Statistiques</h3>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="p-3 rounded-lg bg-gradient-to-r from-white to-violet-50 border border-violet-100">
+              <div class="flex justify-between items-center">
+                <div>
+                  <div class="text-sm text-slate-500">Total de livres</div>
+                  <div id="statTotal" class="text-2xl font-bold text-slate-900">0</div>
+                </div>
+                <svg class="w-8 h-8 text-[var(--brand)]" viewBox="0 0 24 24" fill="none"><path d="M3 7v10a2 2 0 0 0 2 2h10" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
             </div>
-            <div class="p-3 border rounded">
-              <div class="text-sm">Pages lues</div>
-              <div id="statPages" class="text-xl font-bold">0</div>
+            <div class="p-3 rounded-lg bg-white border border-slate-100">
+              <div class="text-sm text-slate-500">Pages lues</div>
+              <div id="statPages" class="text-xl font-semibold mt-2">0</div>
             </div>
-            <div class="p-3 border rounded">
-              <div class="text-sm">Livres finis</div>
-              <div id="statFinished" class="text-xl font-bold">0</div>
-            </div>
+            
           </div>
         </div>
-
-        <div id="booksList" class="space-y-4"></div>
-      </div>
+       
+      </aside>
     </section>
   </div>
 
   <script src="./dist/main.js"></script>
+  <script>
+    const observer = new MutationObserver(() => {
+      document.querySelectorAll('#booksList > .bg-white').forEach(card => {
+        if (!card.querySelector('.prog')) {
+          const pagesText = card.querySelector('p:nth-of-type(3)');
+          if (!pagesText) return;
+          const txt = pagesText.textContent || '';
+          const match = txt.match(/Pages:\s*(\d+)\s*—\s*Read:\s*(\d+)/);
+          if (!match) return;
+          const pages = Number(match[1]), read = Number(match[2]);
+          const percent = pages ? Math.round(read / pages * 100) : 0;
+          const wrap = document.createElement('div');
+          wrap.className = 'mt-3';
+          const bar = document.createElement('div');
+          bar.className = 'w-full bg-slate-100 rounded-full h-3 overflow-hidden';
+          const inner = document.createElement('div');
+          inner.className = 'h-3 prog bg-gradient-to-r from-[var(--accent)] to-[var(--brand)]';
+          inner.style.width = percent + '%';
+          inner.style.transition = 'width 700ms ease';
+          bar.appendChild(inner);
+          const label = document.createElement('div');
+          label.className = 'text-xs text-slate-500 mt-2';
+          label.textContent = percent + '% lu';
+          wrap.appendChild(bar);
+          wrap.appendChild(label);
+          card.appendChild(wrap);
+        }
+      });
+    });
+    observer.observe(document.getElementById('booksList'), { childList: true, subtree: true });
+  </script>
 </body>
 </html>
